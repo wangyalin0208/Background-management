@@ -1,6 +1,6 @@
 <template>   
     <div class="add-warp" index="1-1">
-        <h3>添加试题</h3>
+        <h3>编辑试题</h3>
         <div class="add">
             <div class = 'add-top'>
                 <p>题目信息</p>
@@ -64,7 +64,7 @@ export default {
 }
 </script>
 <style lang = "scss" scoped>
- .add-warp{
+.add-warp{
      width: 100%;
      height: 1470px;
      padding: 20px 50px;

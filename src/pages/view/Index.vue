@@ -139,7 +139,7 @@ export default {
     display: flex;
     .el-menu-vertical-demo {
       width: 225px;
-      height: 700px;
+      height: 1470px;
     }
     .el-menu-item {
       margin-left: 20px;

@@ -1,7 +1,7 @@
 <template>
-    <!--  -->
     <div class="m-">
-        添加考试
+   添加试题
+    
     </div>
 </template>
 <script>
@@ -18,7 +18,5 @@ export default {
 }
 </script>
 <style scoped>
-.m-{
-    
-}
+
 </style>
