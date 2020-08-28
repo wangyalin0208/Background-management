@@ -1,11 +1,12 @@
 <template>
     <div class="m-">
      添加用户 
-        
+      
     </div>
 </template>
 <script>
 
+import {getQuestionsNew} from "@/api"
 export default {
     data(){
         return {
@@ -13,12 +14,10 @@ export default {
         }
     },
     methods: {
-        
+     
     }
 }
 </script>
 <style scoped>
-.m-{
-    
-}
+
 </style>

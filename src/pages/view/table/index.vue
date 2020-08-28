@@ -13,9 +13,4 @@ export default {
 };
 </script>
 <style scoped>
-   .tab{
-     width: 100%;
-     height: 100%;
-     background: #ccc;
-   }
 </style>

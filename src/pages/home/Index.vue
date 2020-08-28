@@ -3,11 +3,9 @@
     <div class="login">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="账号" prop="account">
-              <el-input  v-model="ruleForm.account" autocomplete="off"
-              
+              <el-input  v-model="ruleForm.account" autocomplete="off"           
               ></el-input>
           </el-form-item>
-
           <el-form-item label="密码" prop="pass">
               <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
           </el-form-item>
@@ -25,28 +23,25 @@
   </div>
 </template>
 <script>
+import { login, getUserInfo } from '@/api'
 export default {
-
-  
   data() {
-      return {
-          ruleForm:{
-              account:'',
-              account1:'wang',
-              pass:'',
-              pass1:'1111',
-             
-          },
-      rules: {
-          account:[
-             { required: true, message: '账号不能为空', trigger: 'blur'  },
-          ],
-          pass:[
-             { required: true, message: '密码不能为空', trigger: 'blur'  },
-          ],
+    return {
+      ruleForm:{
+        account:'',
+        pass:'',
       },
-       }
+      rules: {
+        account:[
+          { required: true, message: '账号不能为空', trigger: 'blur'  },
+        ],
+        pass:[
+          { required: true, message: '密码不能为空', trigger: 'blur'  },
+        ],
+      },
+    }
   },
+  created() {},
   methods:{
     rememberpassword(){
       console.log(1)
@@ -56,16 +51,26 @@ export default {
        this.ruleForm.pass=''
     },
     login(){
-      if(this.ruleForm.account == this.ruleForm.account1 && this.ruleForm.pass == this.ruleForm.pass1 ){
-         this.$router.push({path:'../view'})
-      }else{
-           this.$notify.error({
-           message: '账号或密码错误'
-        });
-      }
+      const user_name=this.ruleForm.account
+      const user_pwd=this.ruleForm.pass
+      login({user_name,user_pwd })
+      .then(res=>{
+         const { code, token }=res.data
+        if(code===1){
+          window.localStorage.setItem('token',token)
+           this.$router.push({path:'/view'})
+          this.getInfo()
+        }
+      })
+    },
+    getInfo(){
+      getUserInfo()
+      .then(res=>{
+        const { code, data }=res.data
+        localStorage.setItem('user_id',data.user_id)
+      })
     }
-    }
-  
+  },
 }
 </script>
 <style lang = "scss" scoped>
@@ -87,17 +92,17 @@ p{
     background: white;
     border: 1px solid black;
     .el-form{
-        margin: 70px 50px;
-        margin-left: -20px;
-        .el-button{
-            width: 150px;
-            margin-left: 50px;
-        }
+      margin: 70px 50px;
+      margin-left: -20px;
+      .el-button{
+        width: 150px;
+        margin-left: 50px;
+      }
     }
     .btn{
-        position: absolute;
-        right: -25px;
-        color: gray
+      position: absolute;
+      right: -25px;
+      color: gray
     }
   }
 }

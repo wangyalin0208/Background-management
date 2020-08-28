@@ -5,9 +5,9 @@
             <div class = 'add-top'>
                 <p>题目信息</p>
                 <p>题干</p>
-                <p><input type="text" placeholder="请输入题目标题，不超过20个字"></p>       
+                <p><input type="text" ></p>       
                 <p>题目主题</p>
-                <wang-editor></wang-editor>              
+                <textarea ></textarea>            
             </div>
             <div class='add-bottom' >
                 <el-select v-model="value" placeholder="周考一">
@@ -37,8 +37,8 @@
                     </el-option>
                 </el-select>
                 <p>答案信息</p>
-                <wang-editor></wang-editor> 
-                <el-button type="primary">提交</el-button>
+              <textarea></textarea>
+                <el-button type="primary" @click="getQuestions">提交</el-button>
                   
             </div>  
         </div>
@@ -46,19 +46,23 @@
 </template>
 <script>
 import WangEditor from '../../../../../../components/ue'
-export default {
-      components:{
-        WangEditor
-    },
+import {  getQuestionsNew } from '@/api'
+export default {  
     data(){
         return {
-             textarea2: '' ,
+             tabledata:[],
              value:[],
              options:'',
         }
     },
     methods: {
-        
+        getQuestions(){
+             getQuestionsNew().then((res=>{
+                this.tabledata = res.data.data
+                 console.log(this.tabledata)
+            }))
+
+        }
     },
  
 }

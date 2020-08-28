@@ -127,25 +127,33 @@ export default {
 .warp {
   width: 100%;
   height: 100%;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   .logo {
     width: 100%;
     height: 60px;
     padding: 20px;
+    background: #fff;
   }
   .main {
-    flex: 1;
-    display: flex;
+     flex: 1;
+     display: flex;
+    .main-left{
+       flex: 1;
+       background:#545c64;
+   }
+  
     .el-menu-vertical-demo {
-      width: 225px;
-      height: 1470px;
+      width: 220px;
+      height: 600px;
     }
     .el-menu-item {
       margin-left: 20px;
     }
     .main-right {
-      flex: 1;
+      flex: 7;
+      overflow: auto;
       background: #ccc;
     }
   }
