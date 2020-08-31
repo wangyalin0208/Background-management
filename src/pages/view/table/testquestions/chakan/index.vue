@@ -1,6 +1,6 @@
 <template>   
     <div class="add-warp" index="1-1">
-        <h3>编辑试题</h3>
+        <h3>查看试题</h3>
         <div class="add">
             <div class = 'add-top'>
                 <p>题目信息</p>

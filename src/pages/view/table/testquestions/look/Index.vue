@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="出题人">
         <el-select v-model="formInline.region2" placeholder="请选择">
-          <el-option :key="item.questions_type_id"  :label="item.questions_type_text" :value="item.user_name"></el-option>
+          <el-option v-for="(item) in user" :key="item.questions_type_id" :value="item.user_name"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -27,7 +27,7 @@
       </el-form-item>
     </el-form>
     <div class="look-main">
-      <div class="item" v-for="(item,index) in tabledata" :key='index'>
+      <div class="item" v-for="(item,index) in tabledata" @click='chakan(item)' :key='index'>
         <p>{{item.title}}</p>
         <div class="item-title">
           <ul>
@@ -35,7 +35,7 @@
             <li>{{item.subject_text}}</li>
             <li class="item-test">{{item.exam_name}}</li>
           </ul>
-          <router-link to="/bianji">编辑</router-link>
+          <span  @click.stop="bianji(item)" >编辑</span>
         </div>
         <div class="item-name">{{item.user_name}}发布</div>
       </div>
@@ -43,27 +43,20 @@
   </div>
 </template>
 <script>
-import {getKeCheng,getTest1, getTiMu,getQuestionsCondtion, getQuestionsNew} from "@/api";
+import {getKeCheng,getTest1, getTiMu,getQuestionsCondtion, getuser, getQuestionsNew } from "@/api";
 export default {
   data() {
     return {
       tabledata:[],
       formInline: {
-        region: "",
-        region1:'',
-        region2:'',
+          region: "",
+          region1:'',
+          region2:'',
       },
       testname:[],
-      testtype:
-        {
-           exam_name:'',
-           exam_id:''
-        },
-      timutype:{
-        questions_type_id:'',
-        questions_type_text:'',
-        questions_type_sort:'',
-      }
+      testtype:[],   
+      timutype:[],
+      user:[],
     };
   },
   created() {
@@ -82,34 +75,50 @@ export default {
           this. timutype = res.data.data
         }
       }),
-    getQuestionsNew().then(res =>{
+    getuser().then(res=>{
+      if(res.data.code===1){
+        this.user = res.data.data
+        console.log(user)
+      }
+    }),  
+     getQuestionsNew().then(res =>{
+     if(res.data.code===1){
       this.tabledata = res.data.data
       console.log(this.tabledata)
+     }
     })
   },
   methods: {
     onSubmit() {
-      getQuestionsCondtion().then((res=>{
-       console.log(res)
-        }))
      
     },
     show() {
       this.isshow != this.isshow;
     },
+    chakan(item) {
+      console.log(item)
+      this.$router.history.push({
+        path:'/chakan',    
+      })
+    },
+    bianji(item){
+      this.$router.history.push({
+        path:'/bianji',    
+      })
+    }
   },
   
 };
 </script>
 <style lang = "scss" scoped>
 .look {
-  width: 1034x;
+  width: 950px;
   height: 100%;
   margin: 10px 0 0 40px;
   position: relative;
   .look-title {
     margin-top: 30px;
-    width: 1050px;
+    width: 950px;
     height: 100px;
     background: #fff;
     border-radius: 15px;
@@ -132,7 +141,7 @@ export default {
   .look-main {
     margin-top: 10px;
     background: #fff;
-    width: 1050px;
+    width: 950px;
     height: 100%;
     border-radius: 15px;
     .item {

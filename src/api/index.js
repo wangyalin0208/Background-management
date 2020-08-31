@@ -78,3 +78,11 @@ export const   getQuestionsNew = (params) => {
 
     })
 }
+export const   getuser = (params) => {
+    return axios({
+        url:'/api/user/user',
+        method:'get',
+        params: params
+
+    })
+}

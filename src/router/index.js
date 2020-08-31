@@ -8,6 +8,7 @@ import Add from '@/pages/view/table/testquestions/add'
 import Classification from '@/pages/view/table/testquestions/classification'
 import Look from '@/pages/view/table/testquestions/look'
 import Bianji from '@/pages/view/table/testquestions/bianji'
+import Chakan from '@/pages/view/table/testquestions/chakan'
 
 
 import Classgl from '@/pages/view/table/class/classgl'
@@ -48,6 +49,10 @@ export default new Router({
         {
           path: '/bianji',
           component: Bianji,
+        },
+        {
+          path: '/chakan',
+          component: Chakan,
         },
         {
           path: '/classgl',
